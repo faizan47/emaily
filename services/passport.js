@@ -11,8 +11,6 @@ passport.serializeUser((user, done) => {
 
 // Used to decode the received cookie and persist session
 passport.deserializeUser(async (id, done) => {
-	console.log(id);
-
 	const user = await User.findById(id);
 	done(null, user);
 });
@@ -21,7 +19,8 @@ passport.use(
 		{
 			clientID: googleClientId,
 			clientSecret: googleClientSecret,
-			callbackURL: 'http://localhost:5000/auth/google/callback'
+			callbackURL: '/auth/google/callback',
+			proxy: true
 		},
 		(accessToken, refreshToken, profile, done) => {
 			User.findOne({ id: profile.id }).then(existingUser => {
