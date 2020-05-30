@@ -14,6 +14,9 @@ passport.deserializeUser(async (id, done) => {
 	const user = await User.findById(id);
 	done(null, user);
 });
+console.log(googleClientId, 'googleClientId');
+console.log(googleClientSecret, 'googleClientSecret');
+
 passport.use(
 	new GoogleStrategy(
 		{
