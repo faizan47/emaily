@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV === 'production') {
-	require('./prod');
+	require('./prod.js');
 } else {
-	require('./devher');
+	require('./dev.js');
 }
