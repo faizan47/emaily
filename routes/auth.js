@@ -5,14 +5,11 @@ module.exports = app => {
 
 	app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
 		// Successful authentication, redirect home.
-		res.redirect('/');
+		res.redirect('/surveys');
 	});
 
 	app.get('/', (req, res) => {
-		console.log(req.user);
-		req.user
-			? res.send('You are now logged in!<br><a href="/api/logout">Log Out</a>')
-			: res.send('You are logged out!<br><a href="/auth/google">Log in</a>');
+		req.user ? res.send('You are now logged in!<br><a href="/api/logout">Log Out</a>') : res.redirect('/');
 	});
 
 	app.get('/api/current_user', (req, res) => {
