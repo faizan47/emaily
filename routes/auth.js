@@ -8,10 +8,6 @@ module.exports = app => {
 		res.redirect('/surveys');
 	});
 
-	app.get('/', (req, res) => {
-		req.user ? res.send('You are now logged in!<br><a href="/api/logout">Log Out</a>') : res.redirect('/');
-	});
-
 	app.get('/api/current_user', (req, res) => {
 		res.send(req.user);
 	});
