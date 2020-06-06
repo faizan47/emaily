@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, BrowserRouter } from 'react-router-dom';
+import { Link, BrowserRouter, withRouter } from 'react-router-dom';
 import { fetchUser, logOut } from '../actions/';
 import { connect } from 'react-redux';
 import Payment from './Payment';
@@ -9,22 +9,6 @@ class Header extends Component {
 		this.props.fetchUser();
 	}
 	renderNav() {
-		// switch (this.props.auth) {
-		// 	case true:
-		// 		return (
-		// 			<li>
-		// 				<a href="/api/logout">Logout</a>
-		// 			</li>
-		// 		);
-		// 	case false:
-		// 		return (
-		// 			<li>
-		// 				<a href="/auth/google">Sign In with Google</a>
-		// 			</li>
-		// 		);
-		// 	default:
-		// 		return 'checking..';
-		// }
 		if (this.props.auth) {
 			return [
 				<li key={1}>
@@ -33,10 +17,12 @@ class Header extends Component {
 				<li style={{ margin: '0 10px' }} key={2}>
 					Credits: {this.props.auth.credits}
 				</li>,
-				<li onClick={this.props.logOut} key={3}>
-					<BrowserRouter>
-						<Link to="/">Log Out</Link>
-					</BrowserRouter>
+				<li
+					style={{ cursor: 'pointer', margin: '0 10px' }}
+					onClick={() => this.props.logOut(this.props.history)}
+					key={3}
+				>
+					Log Out
 				</li>
 			];
 		} else if (this.props.auth === false) {
@@ -53,11 +39,9 @@ class Header extends Component {
 		return (
 			<nav>
 				<div className="nav-wrapper">
-					<BrowserRouter>
-						<Link to={this.props.auth ? '/surveys' : '/'} className="brand-logo">
-							Emaily
-						</Link>
-					</BrowserRouter>
+					<Link to={this.props.auth ? '/surveys' : '/'} className="brand-logo">
+						Emaily
+					</Link>
 					<ul id="nav-mobile" className="right hide-on-med-and-down">
 						{this.renderNav()}
 					</ul>
@@ -71,4 +55,4 @@ const mapStateToProps = state => {
 	return { auth: state.auth };
 };
 
-export default connect(mapStateToProps, { fetchUser, logOut })(Header);
+export default connect(mapStateToProps, { fetchUser, logOut })(withRouter(Header));

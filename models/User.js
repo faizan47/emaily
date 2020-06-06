@@ -6,6 +6,4 @@ const userSchema = new Schema({
 	credits: { type: Number, default: 0 }
 });
 
-const User = mongoose.model('User', userSchema);
-
-module.exports = User;
+mongoose.model('users', userSchema);

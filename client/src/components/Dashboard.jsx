@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
+import { reduxForm } from 'redux-form';
 class Dashboard extends Component {
 	render() {
-		return <div>Dashboard</div>;
+		return (
+			<div>
+				<h2>Dashboard</h2>
+				<div className="fixed-action-btn">
+					<Link to="/surveys/new" className="btn-floating btn-large red">
+						<i className="material-icons">add</i>
+					</Link>
+				</div>
+			</div>
+		);
 	}
 }
 
-export default Dashboard;
+export default reduxForm({
+	form: 'createSurvey'
+})(Dashboard);
