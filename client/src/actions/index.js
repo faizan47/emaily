@@ -1,4 +1,4 @@
-import { FETCH_USER, LOG_OUT } from './types';
+import { FETCH_USER, LOG_OUT, FETCH_SURVEYS } from './types';
 import axios from 'axios';
 
 export const fetchUser = () => async dispatch => {
@@ -18,9 +18,12 @@ export const logOut = history => async dispatch => {
 };
 
 export const submitSurvey = (values, history) => async dispatch => {
-	console.log(values, history, 'HELLO');
-
 	const response = await axios.post('/api/surveys', values);
 	dispatch({ type: FETCH_USER, payload: response.data });
 	history.push('/surveys');
+};
+
+export const fetchSurveys = (values, history) => async dispatch => {
+	const response = await axios.get('/api/surveys');
+	dispatch({ type: FETCH_SURVEYS, payload: response.data });
 };

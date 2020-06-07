@@ -10,8 +10,6 @@ module.exports = app => {
 	});
 
 	app.get('/api/current_user', (req, res) => {
-		console.log('HELLo');
-
 		res.send(req.user);
 	});
 	app.get('/api/logout', (req, res) => {

@@ -1,24 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import formInputs from './formInputs';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { submitSurvey } from '../../actions';
 
 class SurveyReview extends Component {
 	renderReviewForm() {
-		return formInputs.map(({ name }) => {
-			return (
-				<div key={name} className="input-field col s12">
-					<input
-						disabled
-						value={this.props.formValues.values[name]}
-						id="disabled"
-						type="text"
-						className="validate"
-					/>
-				</div>
-			);
-		});
+		const { values } = this.props.formValues;
+		return formInputs.map(({ name }) => (
+			<div key={name} className="input-field col s12">
+				<input disabled value={values[name]} type="text" className="validate" />
+			</div>
+		));
 	}
 	render() {
 		return (
@@ -44,8 +37,6 @@ class SurveyReview extends Component {
 	}
 }
 
-const mapStateToProps = state => {
-	return { formValues: state.form.createSurvey };
-};
+const mapStateToProps = state => ({ formValues: state.form.createSurvey });
 
 export default connect(mapStateToProps, { submitSurvey })(withRouter(SurveyReview));

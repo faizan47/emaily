@@ -18,7 +18,7 @@ class App extends Component {
 		return (
 			<BrowserRouter>
 				<Header />
-				<div className="container">
+				<div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 					<Route path="/" component={Landing} exact />
 					<Route path="/surveys" component={Dashboard} exact />
 					<Route path="/surveys/new" component={SurveyFlow} />

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, BrowserRouter, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { fetchUser, logOut } from '../actions/';
 import { connect } from 'react-redux';
 import Payment from './Payment';
@@ -38,7 +38,7 @@ class Header extends Component {
 	render() {
 		return (
 			<nav>
-				<div className="nav-wrapper">
+				<div className="nav-wrapper" style={{ maxWidth: '1200px', margin: '0 auto' }}>
 					<Link to={this.props.auth ? '/surveys' : '/'} className="brand-logo">
 						Emaily
 					</Link>

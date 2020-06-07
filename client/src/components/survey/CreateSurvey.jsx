@@ -43,8 +43,9 @@ const validate = values => {
 
 	formFields.map(({ name }) => {
 		if (!values[name]) {
-			errors[name] = 'Must provide an input';
+			return (errors[name] = 'Must provide an input');
 		}
+		return values[name];
 	});
 
 	return errors;
